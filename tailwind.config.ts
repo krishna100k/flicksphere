@@ -78,10 +78,5 @@ const config = {
   plugins: [require("tailwindcss-animate")],
 } satisfies Config
 
-// module.exports = {
-//   experimental: {
-//     missingSuspenseWithCSRBailout: false,
-//   },
-// }
 
 export default config

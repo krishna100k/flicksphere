@@ -17,7 +17,7 @@ const MovieTile: React.FC<{ data: any, category: string }> = ({ data, category }
 
         <Image
         className=" h-full object-cover"
-          src={`https://image.tmdb.org/t/p/w94_and_h141_bestv2${poster_path || profile_path}`}
+          src={`https://image.tmdb.org/t/p/w94_and_h141_bestv2${poster_path && poster_path || profile_path && profile_path}`}
           alt="Image Not Available"
           width={100}  
           height={100}

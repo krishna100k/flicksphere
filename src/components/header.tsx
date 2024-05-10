@@ -15,7 +15,7 @@ const Header = () => {
   }
 
   return (
-    <header className="w-screen h-16 border-b border-slate-700 bg-black/35 flex items-center justify-between px-7 fixed">
+    <header className="w-screen h-16 border-b border-slate-700 bg-black/35 flex items-center justify-between px-7 fixed z-50">
       <h1 onClick={() => router.replace("/")} className=" font-black text-xl cursor-pointer">
         Giga<span className=" text-[#6D28D9] ">Nigga</span>
       </h1>

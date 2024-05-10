@@ -62,7 +62,6 @@ const Search = () => {
     fetchData();
   }, [categoryQuery, query])
 
-  console.log(data)
 
   return (
     <>
