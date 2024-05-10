@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
+
 const Search = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
