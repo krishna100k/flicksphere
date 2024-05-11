@@ -62,9 +62,9 @@ const Show = () => {
                   </p>
                   <div className="bg-white rounded-full w-2 h-2"></div>
                   <p className="text-sm">
-                    {data?.runtime || data?.number_of_episodes}{" "}
+                    {data?.runtime || data?.number_of_episodes}
                     {category === "tv" ? (
-                      <span>Episodes</span>
+                      <span> Episodes</span>
                     ) : (
                       <span>mins</span>
                     )}
