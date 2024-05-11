@@ -8,7 +8,11 @@ const MovieTile: React.FC<{ data: any, category: string }> = ({ data, category }
   const router = useRouter();
 
   const routeHandler = () => {
+    if(category === "tv"){
+    router.push(`/${id}?category=${category}&season=1&ep=1`)
+    }else{
     router.push(`/${id}?category=${category.toLowerCase()}`)
+    }
   }
 
   return (

@@ -23,7 +23,7 @@ const Search = () => {
   const categories = ["Movie", "TV", "Person"];
 
   const categorySwitch = (category: string) => {
-    router.push(`/search?query=${query}&category=${category}`);
+    router.push(`/search?query=${query}&category=${category.toLocaleLowerCase()}`);
   };
 
   const convertQueryToUrl = ():string => {
@@ -79,7 +79,7 @@ const Search = () => {
               key={category}
               onClick={() => categorySwitch(category)}
               className={`pl-3 mb-3 py-3 cursor-pointer text-sm ${
-                category === categoryQuery && " bg-[#1F2937] "
+                category.toLocaleLowerCase() === categoryQuery && " bg-[#1F2937] "
               }`}
             >
               {category}

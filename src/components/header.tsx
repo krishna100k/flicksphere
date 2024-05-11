@@ -11,7 +11,7 @@ const Header = () => {
   const router = useRouter();
   const searchHandler = (e : FormEvent) => {
     e.preventDefault();
-    router.push(`/search?query=${search}&category=Movie`);
+    router.push(`/search?query=${search}&category=movie`);
   }
 
   return (
