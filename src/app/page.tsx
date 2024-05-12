@@ -5,13 +5,14 @@ import Slider from "@/components/slider";
 const apiKey = process.env.NEXT_PUBLIC_TMDB_AUTH;
 
 const fetchTrendingMovies = async () => {
-  try{
-    const res = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`)
+
+    const res = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`, {cache: "no-store"});
+    if (!res.ok) {
+      throw new Error('Failed to fetch data')
+    }
     const data = await res.json();
     return data;
-  }catch(err){
-    console.log(err);
-  }
+
 }
 
 export default async function Home() {

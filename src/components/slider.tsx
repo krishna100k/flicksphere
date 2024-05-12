@@ -29,7 +29,7 @@ const Slider: React.FC<any> = ({ movieData }) => {
         </button>
       </div>
       <div className=" w-full h-[45rem] bg-slate-700 flex overflow-x-scroll overflow-y-hidden relative no-scrollbar ">
-        {data.map((movie) => {
+        {data?.map((movie) => {
           return (
             <div className={`relative min-w-full h-full overflow-y-hidden transition-all ease-in-out duration-1000`} style={{transform: `translateX(-${index * 100}%)`}}  >
               <div className=" w-full h-full z-[1] absolute flex">
