@@ -9,6 +9,8 @@ import {useRouter} from "next/navigation"
 const Slider: React.FC<any> = ({ movieData }) => {
   const data: [any] = movieData?.results?.slice(0, 5);
 
+  console.log(data);
+
   const router = useRouter();
   
   const [index, setIndex] = useState<number>(0);
@@ -34,7 +36,7 @@ const Slider: React.FC<any> = ({ movieData }) => {
             <div className={`relative min-w-full h-full overflow-y-hidden transition-all ease-in-out duration-1000`} style={{transform: `translateX(-${index * 100}%)`}}  >
               <div className=" w-full h-full z-[1] absolute flex">
                 <div className="w-[40%] h-full  flex justify-end items-start mt-[10vh] lg:mt-28 ml-3 mr-5 lg:mr-20">
-                  <Image
+                  <img
                     className="rounded-md"
                     src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`}
                     alt="Profile"

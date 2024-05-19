@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Slider from "@/components/slider";
 import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
+import MainContent from "@/components/mainContent";
 
 const apiKey = process.env.NEXT_PUBLIC_TMDB_AUTH;
 
@@ -22,9 +23,7 @@ export default async function Home() {
   return (
     <main className="">
       <Header />
-      <main className="pt-[6.5vh]">
-        <Slider movieData={trendingMovies.results} />
-      </main>
+      <MainContent trendingMovies = {trendingMovies} />
       <Footer />
     </main>
   );
