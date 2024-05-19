@@ -7,7 +7,7 @@ import { useState } from "react";
 import {useRouter} from "next/navigation"
 
 const Slider: React.FC<any> = ({ movieData }) => {
-  const data: [any] = movieData?.results.slice(0, 5);
+  const data: [any] = movieData?.results?.slice(0, 5);
 
   const router = useRouter();
   
