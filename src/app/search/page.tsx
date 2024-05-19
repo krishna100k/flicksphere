@@ -86,14 +86,13 @@ const Search = () => {
             </div>
           ))}
         </div>
-        <div className=" col-span-2 lg:col-span-1 row-span-1 lg:w-[70%] rounded-md ">
+        <div className=" col-span-2 lg:col-span-1 row-span-1 lg:w-[70%] rounded-md md:mt-0 mt-10">
             {data?.results.length === 0 && <h1>There is no {categoryQuery?.toLowerCase()} that matched your query</h1>}
             {
               data?.results.map((show : any) => {
                 return <MovieTile data={show} category = {categoryQuery} />
               })
             }
-
         </div>
       </main>
       <Footer />

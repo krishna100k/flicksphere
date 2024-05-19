@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import Series from "@/components/series";
+import Image from  "next/image"
 
 
 const Show = () => {
@@ -17,6 +18,7 @@ const Show = () => {
 
   const apiKey = process.env.NEXT_PUBLIC_TMDB_AUTH;
   const [data, setData] = useState<any>();
+  const [credits, setCredits] = useState<any>();
 
   const fetchMovie = async () => {
     const url = `https://api.themoviedb.org/3/${category}/${id}?api_key=${apiKey}`;
@@ -28,65 +30,83 @@ const Show = () => {
     }
   };
 
+  const fetchCredits = async () => {
+    const url = `https://api.themoviedb.org/3/${category}/${id}/credits?api_key=${apiKey}`
+    try {
+      const res = await axios.get(url);
+      setCredits(res?.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  console.log(credits);
+
   useEffect(() => {
     fetchMovie();
+    fetchCredits();
   }, []);
 
-  // console.log(data);
 
   return (
     <>
       <Header />
       <main className="pt-[7vh]">
-        <div
-          className=" relative w-full h-[40rem] "
-          style={{
-            backgroundImage: `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${data?.backdrop_path})`,
-          }}
-        >
-          <div className="absolute top-0 w-full h-full bg-black/60 backdrop-blur-[1px]">
-            <div className="w-full h-full flex justify-center items-start pt-20 gap-10">
-              <div
-                className=" bg-white w-80 h-[28rem] rounded-md"
-                style={{
-                  backgroundImage: `url(https://media.themoviedb.org/t/p/w300_and_h450_bestv2${data?.poster_path})`,
-                }}
-              ></div>
-              <div className=" w-[40rem] h-auto flex flex-col gap-2">
-                <h1 className="font-black text-2xl">
-                  {data?.title || data?.name}
-                </h1>
-                <div className="flex gap-3 items-center">
-                  <p className="text-sm">
-                    {data?.release_date || data?.first_air_date}
-                  </p>
-                  <div className="bg-white rounded-full w-2 h-2"></div>
-                  <p className="text-sm">
-                    {data?.runtime || data?.number_of_episodes}
-                    {category === "tv" ? (
-                      <span> Episodes</span>
-                    ) : (
-                      <span>mins</span>
-                    )}
-                  </p>
-                  <div className="bg-white rounded-full w-2 h-2"></div>
-                  <p className="text-sm">{data?.vote_average}/10</p>
-                  <div className="bg-white rounded-full w-2 h-2"></div>
-                  <p className="text-sm">{data?.vote_count} votes</p>
-                  <div className="bg-white rounded-full w-2 h-2"></div>
-                  {data?.genres?.map((genre: any) => {
-                    return <p className="text-sm">{genre?.name}</p>;
-                  })}
-                </div>
-                <p className="font-bold">Overview</p>
-                <p>{data?.overview}</p>
-              </div>
+        <div className=" w-full h-auto">
+          <div className="w-full h-full  bg-cover bg-center  " style={{ backgroundImage: `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${data?.backdrop_path})`}}>
+            <div className="w-full h-full py-[5rem] px-5 bg-black/60 backdrop-blur-[1px] flex flex-col md:flex-row justify-center items-center md:items-start gap-10">
+              <img className="rounded-md " src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${data?.poster_path}`} alt="Poster" width={250} height={100}/>
+                      <div className="md:w-[50%] flex flex-col gap-5 md:bg-transparent">
+                        <div>
+                      <h1 className="font-black text-xl md:text-2xl md:text-start text-center">
+                          {data?.title || data?.name}
+                      </h1>
+                            <div className="flex gap-1 md:gap-3 items-center flex-wrap md:justify-start justify-center">
+                              <p className="text-sm">
+                                {data?.release_date || data?.first_air_date}
+                              </p>
+                              <div className="bg-white rounded-full w-2 h-2"></div>
+                              <p className="text-sm">
+                                {data?.runtime || data?.number_of_episodes}
+                                {category === "tv" ? (
+                                  <span> Episodes</span>
+                                ) : (
+                                  <span>mins</span>
+                                )}
+                              </p>
+                              <div className="bg-white rounded-full w-2 h-2"></div>
+                              <p className="text-sm">{data?.vote_average}/10</p>
+                              <div className="bg-white rounded-full w-2 h-2"></div>
+                              <p className="text-sm">{data?.vote_count} votes</p>
+                              <div className="bg-white rounded-full w-2 h-2"></div>
+                              {data?.genres?.map((genre: any) => {
+                                return <p className="text-sm">{genre?.name}</p>;
+                              })}
+                            </div>
+                            </div>
+                            <div className="flex flex-col md:items-start justify-center items-center">
+                              {/* <p className="font-bold">Overview</p> */}
+                              <p className=" md:text-start text-justify">{data?.overview}</p> 
+                            </div>
+
+                            <div className="w-full flex md:justify-start gap-5 justify-center flex-wrap">
+                        {credits?.crew?.slice(0,4).map((cast : any) => {
+                          return (
+                            <div>
+                              <h1 className="font-bold">{cast?.name}</h1>
+                              <p className="text-sm">{cast?.known_for_department}</p>
+                            </div>
+                          )
+                        })}
+                      </div>
+
+                      </div>
             </div>
           </div>
         </div>
         {category === "movie" ? (
           <iframe
-            className="w-[80vw] m-auto h-[80vh] my-36"
+            className="w-[80vw] m-auto h-[45vh] md:h-[80vh] py-10"
             src={`https://vidsrc.to/embed/movie/${id}`}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

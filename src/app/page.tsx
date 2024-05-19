@@ -1,6 +1,5 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import Slider from "@/components/slider";
 import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import MainContent from "@/components/mainContent";
 
