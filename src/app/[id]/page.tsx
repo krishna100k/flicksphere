@@ -51,7 +51,7 @@ const Show = () => {
   return (
     <>
       <Header />
-      <main className="pt-[64px]">
+      <main className="pt-[64px] overflow-hidden">
         <div className=" w-full h-auto">
           <div className="w-full h-full  bg-cover bg-center  " style={{ backgroundImage: `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${data?.backdrop_path})`}}>
             <div className="w-full h-full py-[5rem] px-5 bg-black/70 backdrop-blur-[3px] flex flex-col md:flex-row justify-center items-center md:items-start gap-10">
@@ -106,7 +106,7 @@ const Show = () => {
         </div>
         {category === "movie" ? (
           <iframe
-            className="w-[80vw] m-auto min-h-[28rem] md:min-h-[40rem] lg:min-h-[50rem] py-10"
+            className=" w-[100%] md:w-[80vw] m-auto min-h-[28rem] md:min-h-[40rem] lg:min-h-[50rem] py-10"
             src={`https://vidsrc.to/embed/movie/${id}`}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
