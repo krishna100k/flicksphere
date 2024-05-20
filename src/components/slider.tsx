@@ -2,14 +2,12 @@
 
 import Image from "next/image";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
-import { IoPlayCircleSharp } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {useRouter} from "next/navigation"
 
 
 const Slider: React.FC<any> = ({ movieData }) => {
   const data: [any] = movieData?.results?.slice(0, 5);
-
 
 
   const router = useRouter();
@@ -21,9 +19,20 @@ const Slider: React.FC<any> = ({ movieData }) => {
   }
 
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIndex((prev) => (prev < 4 ? prev + 1 : 0));
+    }, 5000);
+
+    
+    return () => clearTimeout(timer);
+  }, [index]); 
+
+
+
   return (
-    <div className="w-full h-auto relative mt-10">
-      <div className=" top-[50%] absolute z-[2] w-full flex justify-between items-center">
+    <div className="w-full h-auto relative mt-[64px] ">
+      <div className=" top-[50%] absolute z-[2] w-full flex justify-between items-center ">
         <button onClick={() => setIndex((prev) => prev >= 0 ? prev - 1 : 4)}>
           <FaArrowCircleLeft className=" text-3xl ml-5" />
         </button>
@@ -31,10 +40,10 @@ const Slider: React.FC<any> = ({ movieData }) => {
           <FaArrowCircleRight className=" text-3xl mr-5" />
         </button>
       </div>
-      <div className=" w-full h-auto bg-slate-700 flex overflow-x-scroll overflow-y-hidden relative no-scrollbar ">
+      <div className=" w-full h-auto bg-slate-700 flex overflow-x-hidden overflow-y-hidden relative no-scrollbar ">
         {data?.map((data) => {
           return (
-            <div className="min-w-[100vw] h-auto  bg-cover bg-center transition-all ease-in-out duration-1000" style={{ backgroundImage: `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${data?.backdrop_path})`, transform: `translateX(-${index * 100}%)`}}>
+            <div key={data?.id} className="min-w-[100vw] h-auto  bg-cover bg-center transition-all ease-in-out duration-1000" style={{ backgroundImage: `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${data?.backdrop_path})`, transform: `translateX(-${index * 100}%)`}}>
             <div className="w-full h-full md:py-20 py-5 px-5 bg-black/60 backdrop-blur-[1px] flex flex-col md:flex-row justify-center items-center md:items-start gap-10">
               <img className="rounded-md " src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${data?.poster_path}`} alt="Poster" width={250} height={100}/>
                       <div className="md:w-[50%] flex flex-col gap-5 md:bg-transparent">

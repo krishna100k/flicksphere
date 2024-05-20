@@ -35,7 +35,6 @@ const Header = () => {
 
   }, [])
 
-  console.log(toggleSearch);
 
   const router = useRouter();
   const searchHandler = (e: FormEvent) => {
@@ -44,7 +43,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-screen h-16 border-b border-slate-700 bg-black/35 flex items-center justify-between px-7 fixed z-50 backdrop-blur-sm">
+    <header className="w-screen h-16 border-b border-slate-700 bg-black/35 flex items-center justify-between px-7 fixed z-50 backdrop-blur-sm ">
       {toggleSearch ? (
         <form
           onSubmit={searchHandler}
@@ -72,7 +71,7 @@ const Header = () => {
             onClick={() => router.replace("/")}
             className=" font-black text-xl cursor-pointer"
           >
-            Giga<span className=" text-[#6D28D9] ">Nigga</span>
+            Flick<span className=" text-[#6D28D9] ">Sphere</span>
           </h1>
           <div className="flex justify-center items-center gap-5 ">
             <form

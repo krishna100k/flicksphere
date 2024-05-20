@@ -51,7 +51,7 @@ const Show = () => {
   return (
     <>
       <Header />
-      <main className="pt-[7vh]">
+      <main className="pt-[64px]">
         <div className=" w-full h-auto">
           <div className="w-full h-full  bg-cover bg-center  " style={{ backgroundImage: `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${data?.backdrop_path})`}}>
             <div className="w-full h-full py-[5rem] px-5 bg-black/60 backdrop-blur-[1px] flex flex-col md:flex-row justify-center items-center md:items-start gap-10">

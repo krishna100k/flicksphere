@@ -3,6 +3,7 @@
 import Slider from "@/components/slider";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import TrendingMovies from "./trendingMovies";
 
 const MainContent:React.FC<any> = ({trendingMovies}) => {
 
@@ -26,8 +27,9 @@ const MainContent:React.FC<any> = ({trendingMovies}) => {
     const movieData = trendingMovies?.results.length > 0 ? trendingMovies : data
 
   return (
-    <main className="pt-[6.5vh]">
+    <main className="">
       <Slider movieData={movieData} />
+      <TrendingMovies data = {movieData} />
     </main>
   );
 };

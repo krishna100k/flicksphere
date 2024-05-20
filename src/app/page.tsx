@@ -20,7 +20,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="">
+    <main className=" overflow-hidden">
       <Header />
       <MainContent trendingMovies = {trendingMovies} />
       <Footer />
