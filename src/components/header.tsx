@@ -43,7 +43,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-screen h-16 border-b border-slate-700 bg-black/35 flex items-center justify-between px-7 fixed z-50 backdrop-blur-sm ">
+    <header className="w-full h-16 border-b border-slate-700 bg-black/35 flex items-center justify-between px-7 fixed z-50 backdrop-blur-sm ">
       {toggleSearch ? (
         <form
           onSubmit={searchHandler}
