@@ -77,7 +77,7 @@ const Series: React.FC<any> = ({ data, id, category }) => {
         </div>
       </div>
       <iframe
-        className="w-full min-h-[20rem] md:min-h-[30rem] lg:min-h-[50rem] "
+        className="w-full min-h-[28rem] md:min-h-[30rem] lg:min-h-[50rem] "
         src={`https://vidsrc.to/embed/tv/${id}/${seasonNumberQuery}/${epNumberQuery}`}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

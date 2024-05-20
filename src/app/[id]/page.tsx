@@ -106,7 +106,7 @@ const Show = () => {
         </div>
         {category === "movie" ? (
           <iframe
-            className="w-[80vw] m-auto h-[20rem] md:h-[30rem] lg:h-[50rem] py-10"
+            className="w-[80vw] m-auto min-h-[28rem] md:min-h-[40rem] lg:min-h-[50rem] py-10"
             src={`https://vidsrc.to/embed/movie/${id}`}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
