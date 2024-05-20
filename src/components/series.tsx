@@ -49,7 +49,7 @@ const Series: React.FC<any> = ({ data, id, category }) => {
 
   return (
     <div className="bg-[#180E39] w-full h-screen md:h-[80vh] mt-20 flex md:flex-row flex-col-reverse overflow-hidden">
-      <div className="w-[25rem]  flex flex-col gap-5 overflow-y-scroll">
+      <div className=" w-full md:w-[25rem]  flex flex-col gap-5 overflow-y-scroll">
         <p className="pt-5 ml-5 text-sm">List Of Episodes</p>
         <select
           onChange={(e) => fetchData(e?.target?.value)}

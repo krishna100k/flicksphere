@@ -10,8 +10,14 @@ const fetchTrendingMovies = async () => {
   return fetchWithTimeout(url, { cache: "no-store" });
 };
 
+const fetchTrendingSeries = async () => {
+  const url = `https://api.themoviedb.org/3/trending/tv/day?language=en-US&api_key=${apiKey}`;
+  return fetchWithTimeout(url, { cache: "no-store" });
+};
+
 export default async function Home() {
   let trendingMovies;
+  let trendingSeries;
   try {
     trendingMovies = await fetchTrendingMovies();
   } catch (error) {
@@ -19,10 +25,17 @@ export default async function Home() {
     trendingMovies = { results: [] };
   }
 
+  try {
+    trendingSeries = await fetchTrendingSeries();
+  } catch (error) {
+    console.error('Failed to fetch trending Series:', error);
+    trendingSeries = { results: [] };
+  }
+
   return (
     <main className=" overflow-hidden">
       <Header />
-      <MainContent trendingMovies = {trendingMovies} />
+      <MainContent trendingMovies = {trendingMovies} trendingSeries = {trendingSeries}/>
       <Footer />
     </main>
   );
