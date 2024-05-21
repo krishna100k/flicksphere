@@ -40,7 +40,6 @@ const Show = () => {
     }
   }
 
-  console.log(credits);
 
   useEffect(() => {
     fetchMovie();

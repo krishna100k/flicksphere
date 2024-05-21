@@ -8,7 +8,7 @@ const TrendingMovies:React.FC<{data: any, type: String}> = ({data, type}) => {
     const [index, setIndex] = useState<number>(0);
 
   return (
-    <div className='mt-9 px-7 relative'>
+    <div className='my-9 px-7 relative'>
 
         <div className='flex justify-between'>
         <h1 className='text-xl font-bold pb-5'>Trending {type}</h1>

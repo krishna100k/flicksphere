@@ -44,7 +44,7 @@ const MainContent:React.FC<any> = ({trendingMovies, trendingSeries}) => {
     }, [])
 
     const movieData = trendingMovies?.results.length > 0 ? trendingMovies : data;
-    const tvData = trendingSeries?.results?.length > 0 ? trendingSeries : data;
+    const tvData = trendingSeries?.results?.length > 0 ? trendingSeries : TV;
 
   return (
     <main className="">

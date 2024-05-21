@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useEffect } from "react";
 import { GrClose } from "react-icons/gr";
+import Button from "./button";
 
 const Header = () => {
   const [search, setSearch] = useState<string>("");
@@ -92,10 +93,14 @@ const Header = () => {
             <button onClick={() => setToggleSearch(true)}>
               <IoIosSearch className="text-2xl cursor-pointer block sm:hidden" />
             </button>
-            <Avatar className=" cursor-pointer">
+            <div className="flex justify-center items-center gap-3">
+            <button onClick={() => router.push("/login")} className="text-sm">Login</button>
+            <Button>Signup</Button>
+            </div>
+            {/* <Avatar className=" cursor-pointer">
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>K</AvatarFallback>
-            </Avatar>
+            </Avatar> */}
           </div>
         </>
       )}
