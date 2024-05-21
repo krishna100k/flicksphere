@@ -7,8 +7,6 @@ import TrendingMovies from "./trendingMovies";
 
 const MainContent:React.FC<any> = ({trendingMovies, trendingSeries}) => {
 
-  console.log(trendingSeries)
-
     const apiKey = process.env.NEXT_PUBLIC_TMDB_AUTH;
     const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`
     const TVUrl = `https://api.themoviedb.org/3/trending/tv/day?language=en-US&api_key=${apiKey}`

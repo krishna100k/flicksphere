@@ -48,8 +48,8 @@ const Series: React.FC<any> = ({ data, id, category }) => {
   }, []);
 
   return (
-    <div className="bg-[#180E39] w-full h-screen md:h-[80vh] md:mt-20 md:mb-20 flex md:flex-row flex-col-reverse overflow-hidden">
-      <div className=" w-full md:w-[25rem]  flex flex-col gap-5 overflow-y-scroll">
+    <div className="bg-[#180E39] w-full h-full md:h-auto md:mt-20 md:mb-20 flex lg:flex-row flex-col-reverse overflow-hidden">
+      <div className=" w-full lg:w-[25rem] flex flex-col gap-5 overflow-y-scroll">
         <p className="pt-5 ml-5 text-sm">List Of Episodes</p>
         <select
           onChange={(e) => fetchData(e?.target?.value)}
@@ -77,7 +77,7 @@ const Series: React.FC<any> = ({ data, id, category }) => {
         </div>
       </div>
       <iframe
-        className="w-full min-h-[28rem] md:min-h-[30rem] lg:min-h-[50rem] "
+        className="w-full h-auto min-h-[28rem] md:min-h-[30rem] lg:min-h-[50rem]"
         src={`https://vidsrc.to/embed/tv/${id}/${seasonNumberQuery}/${epNumberQuery}`}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
