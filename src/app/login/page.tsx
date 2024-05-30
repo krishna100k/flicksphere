@@ -1,25 +1,69 @@
 "use client"
 
-import React from 'react'
+import React, { FormEvent } from 'react'
 import { FcGoogle } from "react-icons/fc";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
+import { useState } from 'react';
 
 const Login = () => {
 
     const router = useRouter();
 
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+
+
+    const handleSubmit = async (e:FormEvent) => {
+        e.preventDefault();
+
+         if (email === ""){
+            return alert("Please enter Email!");
+        }else if (password === ""){
+            return alert("please enter password! ")
+        }
+
+
+        try{
+
+            const res = await signIn("credentials", {
+                email,
+                password,
+                redirect: false,
+            } );
+
+            console.log("Signed up successfully!", res);
+
+            if(res?.error){
+                console.log(res.error);
+                return alert("Invalid Credentials! : Please try again!");
+            }
+
+            alert("Logged in successfully!");
+            router.push("/")
+
+        }catch(err){
+            console.log(err);
+            alert("Invalid Credentials! : Please try again!")
+        }
+
+
+
+
+    }
+
   return (
     <main className='w-full h-screen ' style={{backgroundImage:`url(/Images/background.jpg)`}} >
         <div className='w-full h-full bg-[#030712]/70 backdrop-blur-[1px] flex justify-center items-center '>
-            <form className='bg-[#09090B] min-w-full min-h-full sm:min-w-[27rem] sm:min-h-[30rem] h-auto rounded-md flex flex-col gap-24'>
+            <form onSubmit={handleSubmit} className='bg-[#09090B] min-w-full min-h-full sm:min-w-[27rem] sm:min-h-[30rem] h-auto rounded-md flex flex-col gap-24'>
                 <div onClick={() => router.push("/")} className='flex justify-center items-center font-black text-4xl mt-10 cursor-pointer'>
                     <h1 className='text-[#F9FAFB]'>F</h1>
                     <h1 className='text-[#6D28D9]'>S</h1>
                 </div>
                 <div className='flex flex-col gap-4 px-10'>
-                    <input className='bg-[#1F2937] p-3 rounded-sm text-[#F9FAFB] text-sm' placeholder='Email' type="text" />
-                    <input className='bg-[#1F2937] p-3 rounded-sm text-[#F9FAFB] text-sm' placeholder='Password' type="text" />
+                    <input onChange={(e) =>setEmail(e?.target?.value) } value={email} className='bg-[#1F2937] p-3 rounded-sm text-[#F9FAFB] text-sm' placeholder='Email' type="text" />
+                    <input onChange={(e) =>setPassword(e?.target?.value) } value={password} className='bg-[#1F2937] p-3 rounded-sm text-[#F9FAFB] text-sm' placeholder='Password' type="text" />
                     <div className='w-full h-full flex items-end justify-end mt-5 gap-4 flex-col-reverse'>
                         <h1 className='text-sm h-full'>New User? <Link href={"/signup"}>Create an account.</Link></h1>
                         <button type='submit' className="bg-[#6D28D9] w-28 h-9  rounded-sm">Login</button>
