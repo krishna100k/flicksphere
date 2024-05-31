@@ -41,13 +41,13 @@ const Signup = () => {
                 email: email,
                 password: password
             });
-            // router.push("/");
+            
 
             if(!signin?.ok) console.log(signin?.error);
-
             console.log(signin)
 
             alert("Registration Successfull!")
+            router.push("/");
         }catch(err){
             console.log(err);
             alert("Registration Failed: User Already Exists!");
