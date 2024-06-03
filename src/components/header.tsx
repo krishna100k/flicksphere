@@ -6,8 +6,9 @@ import { FormEvent, useState } from "react";
 import { useEffect } from "react";
 import { GrClose } from "react-icons/gr";
 import Button from "./button";
+import { UserSession } from "@/packages/types/user";
 
-const Header = () => {
+const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
   const [search, setSearch] = useState<string>("");
   const [smallScreen, setSmallScreen] = useState<boolean>(false);
 
@@ -27,21 +28,21 @@ const Header = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if(window.innerWidth >= 640){
+      if (window.innerWidth >= 640) {
         setToggleSearch(false);
       }
     };
 
     window.addEventListener("resize", handleResize);
-
-  }, [])
-
+  }, []);
 
   const router = useRouter();
   const searchHandler = (e: FormEvent) => {
     e.preventDefault();
     router.push(`/search?query=${search}&category=movie`);
   };
+
+  const name = user?.name as string
 
   return (
     <header className="w-full h-16 border-b border-slate-700 bg-black/35 flex items-center justify-between px-7 fixed z-50 backdrop-blur-sm ">
@@ -58,12 +59,12 @@ const Header = () => {
             className="bg-[#030712] border border-[#595959] text-sm pl-2 pr-10 rounded-sm text-[595959] h-10  "
           />
           <div className="flex gap-5">
-          <button type="submit">
-            <IoIosSearch className="text-2xl cursor-pointer " />
-          </button>
-          <button onClick={() => setToggleSearch(false)}>
-            <GrClose className="text-xl cursor-pointer " />
-          </button>
+            <button type="submit">
+              <IoIosSearch className="text-2xl cursor-pointer " />
+            </button>
+            <button onClick={() => setToggleSearch(false)}>
+              <GrClose className="text-xl cursor-pointer " />
+            </button>
           </div>
         </form>
       ) : (
@@ -93,14 +94,22 @@ const Header = () => {
             <button onClick={() => setToggleSearch(true)}>
               <IoIosSearch className="text-2xl cursor-pointer block sm:hidden" />
             </button>
-            <div className="flex justify-center items-center gap-3">
-            <button onClick={() => router.push("/login")} className="text-sm">Login</button>
-            <Button>Signup</Button>
-            </div>
-            {/* <Avatar className=" cursor-pointer">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>K</AvatarFallback>
-            </Avatar> */}
+            {user ? (
+              <Avatar className=" cursor-pointer">
+                <AvatarImage src={user?.image} />
+                <AvatarFallback>{name[0]}</AvatarFallback>
+              </Avatar>
+            ) : (
+              <div className="flex justify-center items-center gap-3">
+                <button
+                  onClick={() => router.push("/login")}
+                  className="text-sm"
+                >
+                  Login
+                </button>
+                <Button>Signup</Button>
+              </div>
+            )}
           </div>
         </>
       )}

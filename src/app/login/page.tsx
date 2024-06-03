@@ -33,12 +33,12 @@ const Login = () => {
                 redirect: false,
             } );
 
-            console.log("Signed up successfully!", res);
-
             if(res?.error){
                 console.log(res.error);
                 return alert("Invalid Credentials! : Please try again!");
             }
+
+            console.log("Signed up successfully!", res);
 
             alert("Logged in successfully!");
             router.push("/")
@@ -73,7 +73,7 @@ const Login = () => {
                         <h1>Or</h1>
                         <div className='h-[1px] w-full bg-[#F9FAFB]'></div>
                     </div>
-                    <button className='w-full py-2 bg-[#F9FAFB] rounded-sm flex justify-center items-center mb-12'>
+                    <button type="button" onClick={() => signIn("google")} className='w-full py-2 bg-[#F9FAFB] rounded-sm flex justify-center items-center mb-12'>
                         <FcGoogle className='text-2xl' />
                     </button>
                 </div>

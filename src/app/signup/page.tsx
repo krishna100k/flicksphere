@@ -27,7 +27,7 @@ const Signup = () => {
         }
 
         const data = {
-            fullname,
+            name : fullname,
             email,
             password
         }
@@ -48,9 +48,9 @@ const Signup = () => {
 
             alert("Registration Successfull!")
             router.push("/");
-        }catch(err){
+        }catch(err : any){
             console.log(err);
-            alert("Registration Failed: User Already Exists!");
+            alert(`Registration Failed: ${err?.response?.data}`);
         }
 
 
