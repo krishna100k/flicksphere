@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import axios from "axios";
+import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
 
 const Signup = () => {
 
@@ -14,6 +15,7 @@ const Signup = () => {
     const [fullname, setFullname] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = async (e:FormEvent) => {
         e.preventDefault();
@@ -70,7 +72,7 @@ const Signup = () => {
                     <input onChange={(e) => setPassword(e?.target?.value)} value={password} className='bg-[#1F2937] p-3 rounded-sm text-[#F9FAFB] text-sm' placeholder='Password' type="text" />
                     <div className='w-full h-full flex items-end justify-end mt-5 gap-4 flex-col-reverse'>
                         <h1 className='text-sm h-full'>Already have an account? <Link href={"/login"}>Login.</Link></h1>
-                        <button type='submit' className="bg-[#6D28D9] w-28 h-9  rounded-sm">Signup</button>
+                        <button disabled={loading ? true : false} type='submit' className="bg-[#6D28D9] w-28 h-9  rounded-sm flex justify-center items-center">{loading ? <CircularProgress style={{color: "white", width:"25px", height: "25px"}} /> : "Signup"}</button>
                     </div>
                     <div className='flex items-center justify-center gap-1 mt-5'>
                         <div className='h-[1px] w-full bg-[#F9FAFB]'></div>
