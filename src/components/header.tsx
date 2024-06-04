@@ -149,7 +149,7 @@ const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
                 >
                   Login
                 </button>
-                <Button>Signup</Button>
+                <button className = "bg-[#F9FAFB] text-sm text-black py-2 px-3 rounded-sm" onClick={() => router.push("/signup")}>Signup</button>
               </div>
             )}
           </div>

@@ -2,9 +2,6 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import MainContent from "@/components/mainContent";
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth";
-import { UserSession } from "@/packages/types/user";
 
 const apiKey = process.env.NEXT_PUBLIC_TMDB_AUTH;
 
