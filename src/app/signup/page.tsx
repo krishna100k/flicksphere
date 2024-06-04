@@ -77,7 +77,7 @@ const Signup = () => {
                         <h1>Or</h1>
                         <div className='h-[1px] w-full bg-[#F9FAFB]'></div>
                     </div>
-                    <button className='w-full py-2 bg-[#F9FAFB] rounded-sm flex justify-center items-center mb-12'>
+                    <button type='button' onClick={() => signIn("google")} className='w-full py-2 bg-[#F9FAFB] rounded-sm flex justify-center items-center mb-12'>
                         <FcGoogle className='text-2xl' />
                     </button>
                 </div>
