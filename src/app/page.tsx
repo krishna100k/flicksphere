@@ -24,7 +24,7 @@ export default async function Home() {
   let trendingMovies;
   let trendingSeries;
 
-  const session = await getServerSession(authOptions);
+
 
 
   try {
@@ -43,7 +43,7 @@ export default async function Home() {
 
   return (
     <main className=" overflow-hidden">
-      <Header user={session?.user as UserSession} />
+      {/* <Header user={session?.user as UserSession} /> */}
       <MainContent trendingMovies = {trendingMovies} trendingSeries = {trendingSeries}/>
       <Footer />
     </main>

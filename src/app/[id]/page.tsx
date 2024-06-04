@@ -49,7 +49,7 @@ const Show = () => {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main className="pt-[64px] overflow-hidden">
         <div className=" w-full h-auto">
           <div className="w-full h-full  bg-cover bg-center  " style={{ backgroundImage: `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${data?.backdrop_path})`}}>

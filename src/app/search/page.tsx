@@ -65,7 +65,7 @@ const Search = () => {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main className="pt-[15vh] pb-[19vh] grid grid-rows-[1fr, auto] lg:grid-cols-[20vw] items-start px-5 lg:px-0 lg:gap-y-16 gap-x-28 ">
         <h1 className=" justify-self-center row-span-1 col-span-2">
           Search Results for <b>{query}</b>.
