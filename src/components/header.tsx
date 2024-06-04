@@ -2,15 +2,22 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { IoIosSearch } from "react-icons/io";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, Ref, useState } from "react";
 import { useEffect } from "react";
 import { GrClose } from "react-icons/gr";
 import Button from "./button";
 import { UserSession } from "@/packages/types/user";
+import { useRef } from "react";
+import { signOut } from "next-auth/react";
 
 const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
   const [search, setSearch] = useState<string>("");
   const [smallScreen, setSmallScreen] = useState<boolean>(false);
+  const [popOver, setPopOver] = useState<boolean>(false);
+  const popRef = useRef(null);
+  const avatarRef = useRef(null)
+
+  console.log(popOver);
 
   const [toggleSearch, setToggleSearch] = useState<boolean>(false);
 
@@ -35,6 +42,36 @@ const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
 
     window.addEventListener("resize", handleResize);
   }, []);
+  
+  useEffect(() => {
+    const handleOpen = () => {
+      setPopOver(true);
+    }
+
+    const handleClose = () => {
+      setPopOver(false);
+    }
+
+    const element : any = popRef?.current;
+    const avatar : any = avatarRef?.current;
+    if (element) {
+      element.addEventListener("mouseover", handleOpen);
+      element.addEventListener("mouseout", handleClose);
+      avatar.addEventListener("mouseover", handleOpen);
+      avatar.addEventListener("mouseout", handleClose);
+    }
+
+    return () => {
+      if (element) {
+        avatar.removeEventListener("mouseover", handleOpen);
+        avatar.removeEventListener("mouseout", handleClose);
+      }
+    }
+
+  })
+
+
+
 
   const router = useRouter();
   const searchHandler = (e: FormEvent) => {
@@ -95,10 +132,15 @@ const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
               <IoIosSearch className="text-2xl cursor-pointer block sm:hidden" />
             </button>
             {user ? (
-              <Avatar className=" cursor-pointer">
+              <>
+              <Avatar ref={avatarRef} className=" cursor-pointer">
                 <AvatarImage src={user?.image} />
                 <AvatarFallback>{name[0]}</AvatarFallback>
               </Avatar>
+              <div ref={popRef} className={` flex flex-col justify-start pt-5 items-center absolute top-14 right-10 rounded-md bg-[#01050F] overflow-hidden ${popOver ? "h-48 w-40" : "h-0 w-0"} transition-all duration-200 ease-in-out`}>
+                <button onClick={() => signOut()} className="  transition-all duration-200 hover:bg-white/20 px-5 py-1 rounded-md">Logout</button>
+              </div>
+              </>
             ) : (
               <div className="flex justify-center items-center gap-3">
                 <button

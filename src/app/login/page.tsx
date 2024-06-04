@@ -30,7 +30,7 @@ const Login = () => {
             const res = await signIn("credentials", {
                 email,
                 password,
-                redirect: false,
+                redirect: true,
             } );
 
             if(res?.error){
@@ -41,8 +41,8 @@ const Login = () => {
             console.log("Signed up successfully!", res);
 
             alert("Logged in successfully!");
-            router.push("/")
-            router.refresh()
+            // router.push("/")
+            // router.refresh()
 
         }catch(err){
             console.log(err);

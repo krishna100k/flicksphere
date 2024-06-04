@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { Profile } from "next-auth";
+import { NextResponse } from "next/server";
 
 interface GoogleProfile extends Profile {
   sub: string;
@@ -93,6 +94,7 @@ export const authOptions: NextAuthOptions = {
             return true
           }else{
             return true;
+            
           }
         }catch(err){
           console.log("Error Signing In", err);
@@ -102,6 +104,9 @@ export const authOptions: NextAuthOptions = {
 
       return true;
 
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl
     },
     // async session({ session, token, user } ) {
     //   session.user.id = user.id;
