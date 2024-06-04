@@ -42,6 +42,7 @@ const Login = () => {
 
             alert("Logged in successfully!");
             router.push("/")
+            router.refresh()
 
         }catch(err){
             console.log(err);

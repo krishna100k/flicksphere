@@ -1,4 +1,4 @@
-export const fetchWithTimeout = async (url, options = {}, timeout = 10000, retries = 3) => {
+export const fetchWithTimeout : any = async (url : any, options = {}, timeout = 10000, retries = 3)  => {
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
   
@@ -14,7 +14,7 @@ export const fetchWithTimeout = async (url, options = {}, timeout = 10000, retri
       }
   
       return response.json();
-    } catch (error) {
+    } catch (error : any) {
       if (retries > 0 && error.name !== 'AbortError') {
         console.warn(`Retrying fetch... (${retries} attempts left)`);
         return fetchWithTimeout(url, options, timeout, retries - 1);
