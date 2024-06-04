@@ -17,7 +17,7 @@ interface GoogleProfile extends Profile {
 const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  // adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
         type: "credentials",
@@ -33,20 +33,22 @@ export const authOptions: NextAuthOptions = {
             },
           });
 
+
           if (!user) {
             throw new Error("User not found");
           }
 
           const passwordMatch = await bcrypt.compare(password, user.password as string);
 
+
           if (!passwordMatch) {
             throw new Error("Password incorrect");
           }
 
           return user;
-        } catch (err) {
-          console.error("Error during login:", err);
-          throw new Error("Login failed");
+        } catch (err:any) {
+          console.error(err);
+          throw new Error(err);
         }
       },
     }),
@@ -71,7 +73,8 @@ export const authOptions: NextAuthOptions = {
             }
           });
 
-          if(!user?.image){
+
+          if(user && !user?.image){
             await prisma.user.update({
               where:{
                 id: user?.id
@@ -99,6 +102,7 @@ export const authOptions: NextAuthOptions = {
         }catch(err){
           console.log("Error Signing In", err);
           return false;
+
         }
       }
 

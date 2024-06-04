@@ -33,25 +33,27 @@ const Login = () => {
             const res = await signIn("credentials", {
                 email : email.toLowerCase(),
                 password,
-                redirect: true,
+                redirect: false,
             } );
 
-            if(res?.error){
-                console.log(res.error);
-                return alert("Invalid Credentials! : Please try again!");
+            console.log(res?.error)
+
+            if(!res?.ok){
+                setLoading(false);
+               return alert("Invalid Email or Password!");
             }
 
-            console.log("Signed up successfully!", res);
-            setLoading(false);
+            
 
             alert("Logged in successfully!");
-            // router.push("/")
-            // router.refresh()
+            setLoading(false);
+            router.push("/")
+            router.refresh()
 
         }catch(err){
             setLoading(false);
             console.log(err);
-            alert("Invalid Credentials! : Please try again!")
+            alert("Login Failed!")
         }
 
 

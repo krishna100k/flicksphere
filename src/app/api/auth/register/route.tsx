@@ -12,6 +12,7 @@ export const POST = async (req: NextRequest) => {
         return NextResponse.json(parsedData.error, {status: 400})
     }
 
+
     const {name, email, password} = parsedData?.data
     const prisma = new PrismaClient();
 

@@ -35,6 +35,7 @@ const Signup = () => {
         }
 
         try{
+            setLoading(true);
             const res = await axios.post(`/api/auth/register`, data);
             if(!res.data) return;
 
@@ -47,12 +48,18 @@ const Signup = () => {
 
             if(!signin?.ok) console.log(signin?.error);
             console.log(signin)
+            setLoading(false);
 
             alert("Registration Successfull!")
             router.push("/");
+            router.refresh();
         }catch(err : any){
+            setLoading(false);
             console.log(err);
-            alert(`Registration Failed: ${err?.response?.data}`);
+            if(err?.response?.data?.name === "ZodError"){
+                return alert("Invalid Email Format!")
+            }
+            alert(`Registration Failed`);
         }
 
 
