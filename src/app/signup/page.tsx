@@ -28,7 +28,7 @@ const Signup = () => {
 
         const data = {
             name : fullname,
-            email,
+            email : email.toLowerCase(),
             password
         }
 

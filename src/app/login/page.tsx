@@ -28,7 +28,7 @@ const Login = () => {
         try{
 
             const res = await signIn("credentials", {
-                email,
+                email : email.toLowerCase(),
                 password,
                 redirect: true,
             } );
