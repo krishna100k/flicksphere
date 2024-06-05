@@ -39,19 +39,19 @@ const Signup = () => {
             const res = await axios.post(`/api/auth/register`, data);
             if(!res.data) return;
 
-           const signin =  await signIn("credentials", {
-                redirect: false,
-                email: email,
-                password: password
-            });
+        //    const signin =  await signIn("credentials", {
+        //         redirect: false,
+        //         email: email,
+        //         password: password
+        //     });
             
 
-            if(!signin?.ok) console.log(signin?.error);
-            console.log(signin)
-            setLoading(false);
+        //     if(!signin?.ok) console.log(signin?.error);
+        //     console.log(signin)
+        //     setLoading(false);
 
             alert("Registration Successfull!")
-            router.push("/");
+            router.push("/login");
             router.refresh();
         }catch(err : any){
             setLoading(false);
