@@ -5,27 +5,27 @@ import Image from "next/image";
 import { useRouter } from 'next/navigation'
 import { useSelector } from "react-redux";
 
-interface CWState {
+export interface CWState {
   continueWatching : {data : ContinueWatchingSchema[]}
 }
 
 const MovieCards:React.FC<any> = ({data, type}) => {
 
-    const userId = data?.userId
+    // const userId = data?.userId
     const CWData = useSelector((state : CWState) => state?.continueWatching?.data)
 
     const router = useRouter();
 
     const clickHandler = () => {
-      if (userId) {
-        if (type === "movie") {
-          router.push(`/${data?.movieId}?category=movie`);
-          return;
-        } else if (type === "tv") {
-          router.push(`/${data?.movieId}?category=tv&season=${data?.season}&ep=${data?.episode}`);
-          return;
-        }
-      }
+      // if (userId) {
+      //   if (type === "movie") {
+      //     router.push(`/${data?.movieId}?category=movie`);
+      //     return;
+      //   } else if (type === "tv") {
+      //     router.push(`/${data?.movieId}?category=tv&season=${data?.season}&ep=${data?.episode}`);
+      //     return;
+      //   }
+      // }
     
       if (type === "Movies") {
         router.push(`/${data?.id}?category=movie`);

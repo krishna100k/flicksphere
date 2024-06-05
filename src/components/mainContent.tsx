@@ -7,14 +7,21 @@ import TrendingMovies from "./trendingMovies";
 import { ContinueWatchingSchema } from "@/packages/types/continueWatching";
 import ContinueWatching from "./continuewatching";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+
+interface CWState {
+  continueWatching : {data : ContinueWatchingSchema[]}
+}
 
 interface Props {
   trendingMovies: any;
   trendingSeries: any;
-  continueWatching: ContinueWatchingSchema[] ;
+  // continueWatching: ContinueWatchingSchema[] ;
 }
 
-const MainContent:React.FC<Props> = ({trendingMovies, trendingSeries, continueWatching}) => {
+const MainContent:React.FC<Props> = ({trendingMovies, trendingSeries}) => {
+
+  const CWData = useSelector((state : CWState) => state?.continueWatching?.data)
 
 
     const apiKey = process.env.NEXT_PUBLIC_TMDB_AUTH;
@@ -67,7 +74,7 @@ const MainContent:React.FC<Props> = ({trendingMovies, trendingSeries, continueWa
       <Slider movieData={movieData} />
       <TrendingMovies type={"Movies"} data = {movieData} />
       <TrendingMovies type={"Series"} data={tvData} /> 
-      <ContinueWatching data={continueWatching} />
+      <ContinueWatching data={CWData} />
     </main>
   );
 };

@@ -9,17 +9,46 @@ import Button from "./button";
 import { UserSession } from "@/packages/types/user";
 import { useRef } from "react";
 import { signOut } from "next-auth/react";
+import axios from "axios";
+import { ContinueWatchingSchema } from "@/packages/types/continueWatching";
+import { UseDispatch, useDispatch } from "react-redux";
+import { addCW } from "@/app/redux/slices/continueWatchingSlice";
+import Link from "next/link";
 
 const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
   const [search, setSearch] = useState<string>("");
   const [smallScreen, setSmallScreen] = useState<boolean>(false);
   const [popOver, setPopOver] = useState<boolean>(false);
+  const [toggleSearch, setToggleSearch] = useState<boolean>(false);
+  const [CW, setCW] = useState<ContinueWatchingSchema[]>();
+
+
   const popRef = useRef(null);
   const avatarRef = useRef(null)
 
-  console.log(popOver);
 
-  const [toggleSearch, setToggleSearch] = useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  const fetchCW = async (id : string) => {
+    try{
+      const url = `/api/continuewatching?id=${id}`;
+      const res = await axios.get(url);
+
+      dispatch(addCW(res?.data));
+
+    }catch(err){
+      console.log(err)
+    }
+
+  }
+
+  useEffect( () => {
+
+    if(user){
+       fetchCW(user?.id)
+    }
+    
+  }, [user])
 
   useEffect(() => {
     const handleResize = () => {
@@ -137,8 +166,9 @@ const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
                 <AvatarImage src={user?.image} />
                 <AvatarFallback>{name[0]}</AvatarFallback>
               </Avatar>
-              <div ref={popRef} className={` flex flex-col justify-start pt-5 items-center absolute top-14 right-10 rounded-md bg-[#01050F] overflow-hidden ${popOver ? "h-48 w-40" : "h-0 w-0"} transition-all duration-200 ease-in-out`}>
-                <button onClick={() => signOut()} className="  transition-all duration-200 hover:bg-white/20 px-5 py-1 rounded-md">Logout</button>
+              <div ref={popRef} className={` flex flex-col justify-start gap-4 pt-5 items-center absolute top-14 right-10 rounded-md bg-[#01050F] overflow-hidden ${popOver ? "h-48 w-40" : "h-0 w-0"} transition-all duration-200 ease-in-out`}>
+                <Link href={"/continue"} className="transition-all duration-200 hover:bg-white/20 px-5 py-1 rounded-md text-center text-sm text-wrap">Continue Watching</Link>
+                <button onClick={() => signOut()} className="  transition-all duration-200 hover:bg-white/20 px-5 py-1 rounded-md  text-sm">Logout</button>
               </div>
               </>
             ) : (
