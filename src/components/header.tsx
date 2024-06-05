@@ -20,7 +20,7 @@ const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
   const [smallScreen, setSmallScreen] = useState<boolean>(false);
   const [popOver, setPopOver] = useState<boolean>(false);
   const [toggleSearch, setToggleSearch] = useState<boolean>(false);
-  const [CW, setCW] = useState<ContinueWatchingSchema[]>();
+
 
 
   const popRef = useRef(null);
@@ -46,6 +46,8 @@ const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
 
     if(user){
        fetchCW(user?.id)
+    }else{
+      router.replace("/")
     }
     
   }, [user])
