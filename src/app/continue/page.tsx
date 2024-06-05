@@ -21,7 +21,7 @@ const Continue = () => {
 
   return (
     <div className="pt-[64px] w-full">
-        {CWData.length === 0 ? <CircularProgress style={{color: "white", position: "relative", left: "50%", marginBottom: "20%", marginTop: "20%"}} /> : <ContinueWatching data={CWData} /> }
+        {CWData.length === 0 ? <h1 className="w-full flex justify-center h-screen items-center ">Your List is Empty!</h1> : <ContinueWatching data={CWData} /> }
         <Footer />
         </div>
   )

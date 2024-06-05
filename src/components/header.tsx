@@ -46,8 +46,6 @@ const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
 
     if(user){
        fetchCW(user?.id)
-    }else{
-      router.replace("/")
     }
     
   }, [user])
