@@ -32,6 +32,11 @@ const CWCards:React.FC<any> = ({data, type}) => {
     };
 
     const deleteHandler = async (id : string) => {
+      const confirmation = window.confirm("Are you sure you want to delete!");
+
+      if(!confirmation){
+        return null;
+      }
 
       try{
         if(!id) return alert("Falied To Delete : ID Not Found!")

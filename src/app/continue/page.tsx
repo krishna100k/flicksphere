@@ -17,7 +17,6 @@ interface CWState {
 const Continue = () => {
 
     const CWData = useSelector((state : CWState) => state?.continueWatching?.data);
-    console.log(CWData)
 
   return (
     <div className="pt-[64px] w-full ">

@@ -1,11 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ContinueWatching } from "@/packages/types/continueWatching";
 import DBClient from '@/lib/prisma'
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 
 
 const prisma = DBClient.getInstance().prisma
 
 export const POST = async (req: NextRequest) => {
+
+    const session = await getServerSession(authOptions);
+    
+    if (!session) {
+        return NextResponse.json("Unauthorized", { status: 401 });
+    }
 
 
     const data = await req.json();
@@ -75,6 +83,13 @@ export const POST = async (req: NextRequest) => {
 }
 
 export const GET = async (req: NextRequest) => {
+
+    const session = await getServerSession(authOptions);
+    
+    if (!session) {
+        return NextResponse.json("Unauthorized", { status: 401 });
+    }
+
     const searchParams = req.nextUrl.searchParams;
     const id = searchParams.get("id");
 
@@ -99,6 +114,12 @@ export const GET = async (req: NextRequest) => {
 };
 
 export const DELETE = async (req: NextRequest) => {
+
+    const session = await getServerSession(authOptions);
+    
+    if (!session) {
+        return NextResponse.json("Unauthorized", { status: 401 });
+    }
 
     const searchParams = req.nextUrl.searchParams;
     const id = searchParams.get("id");
