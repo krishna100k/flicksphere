@@ -48,7 +48,7 @@ const MovieCards:React.FC<any> = ({data, type}) => {
     const date = data?.release_date || data?.first_air_date
 
   return (
-    <div onClick={clickHandler} key={data?.id} className="lg:min-w-52 md:min-w-40 lg:w-52 md:w-40 min-w-32 w-32 cursor-pointer rounded-md overflow-hidden">
+    <div onClick={clickHandler} key={data?.id} className="lg:min-w-52 md:min-w-40 lg:w-52 md:w-40 min-w-32 w-32 cursor-pointer rounded-md overflow-hidden py-4">
         <img className="h-full w-full rounded-md" src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${data?.poster_path || data?.imageUrl}`} alt="Poster"  width={500} height={500}  />
         <h1 className=" text-wrap pl-2 pt-4">
             {data?.title || data?.name || data?.contentName }

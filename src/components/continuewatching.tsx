@@ -20,7 +20,7 @@ const ContinueWatching:React.FC<{data:ContinueWatchingSchema[]}> = ({data}) => {
     {data[0]?.userId && 
     <div className="my-9 px-7 relative">
         <h1 className='text-xl font-bold pb-5'>Continue Watching</h1>
-        <div  className="flex items-center gap-3">
+        <div  className="flex items-center gap-3 flex-wrap">
         {data.map((CW) => {
             return <MovieCards data={CW} type = {CW?.category} />
         })}
