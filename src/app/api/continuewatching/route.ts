@@ -97,3 +97,25 @@ export const GET = async (req: NextRequest) => {
         return NextResponse.json(err, { status: 400 });
     }
 };
+
+export const DELETE = async (req: NextRequest) => {
+
+    const searchParams = req.nextUrl.searchParams;
+    const id = searchParams.get("id");
+
+    if(!id){
+        return NextResponse.json("Id Not Found!", { status: 404 });
+    }
+
+    try{
+        const res = await prisma.continueWatching.delete({
+            where:{
+                id
+            }
+        });
+
+        return NextResponse.json(res, {status: 200});
+    }catch(err){
+        return NextResponse.json(err, {status: 400});
+    }
+}

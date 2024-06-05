@@ -20,8 +20,10 @@ const Continue = () => {
     console.log(CWData)
 
   return (
-    <div className="pt-[64px] w-full">
+    <div className="pt-[64px] w-full ">
+        <div className="min-h-[40rem]">
         {CWData.length === 0 ? <h1 className="w-full flex justify-center h-screen items-center ">Your List is Empty!</h1> : <ContinueWatching data={CWData} /> }
+        </div>
         <Footer />
         </div>
   )
