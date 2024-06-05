@@ -14,7 +14,6 @@ const ContinueWatching:React.FC<{data:ContinueWatchingSchema[]}> = ({data}) => {
         dispatch(addCW(data))
     }, [data])
 
-    console.log(data)
 
   return (
     <>

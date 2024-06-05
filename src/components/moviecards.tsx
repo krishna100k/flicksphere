@@ -1,31 +1,49 @@
 "use client"
 
+import { ContinueWatchingSchema } from "@/packages/types/continueWatching";
 import Image from "next/image";
 import { useRouter } from 'next/navigation'
 import { useSelector } from "react-redux";
 
+interface CWState {
+  continueWatching : {data : ContinueWatchingSchema[]}
+}
+
 const MovieCards:React.FC<any> = ({data, type}) => {
 
     const userId = data?.userId
+    const CWData = useSelector((state : CWState) => state?.continueWatching?.data)
 
     const router = useRouter();
 
     const clickHandler = () => {
-
-      if(userId){
-        if(type === "movie"){
-          router.push(`/${data?.movieId}?category=movie`)
-        }else if (type === "tv"){
-          router.push(`/${data?.movieId}?category=tv&season=${data?.season}&ep=${data?.episode}`)
+      if (userId) {
+        if (type === "movie") {
+          router.push(`/${data?.movieId}?category=movie`);
+          return;
+        } else if (type === "tv") {
+          router.push(`/${data?.movieId}?category=tv&season=${data?.season}&ep=${data?.episode}`);
+          return;
         }
       }
-
-      if(type === "Movies"){
-        router.push(`/${data?.id}?category=movie`)
-      }else if(type === "Series"){
-        router.push(`/${data?.id}?category=tv&season=1&ep=1`)
+    
+      if (type === "Movies") {
+        router.push(`/${data?.id}?category=movie`);
+        return;
+      } else if (type === "Series") {
+        if (CWData.length > 0) {
+          const item = CWData.find((item: ContinueWatchingSchema) => data?.id == item?.movieId);
+          if (item) {
+            router.push(`/${item?.movieId}?category=tv&season=${item?.season}&ep=${item?.episode}`);
+          } else {
+            router.push(`/${data?.id}?category=tv&season=1&ep=1`);
+          }
+        } else {
+          router.push(`/${data?.id}?category=tv&season=1&ep=1`);
+        }
       }
-    }
+    };
+    
 
     const date = data?.release_date || data?.first_air_date
 
