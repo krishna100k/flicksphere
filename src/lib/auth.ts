@@ -1,11 +1,14 @@
-import nextAuth, { NextAuthOptions } from "next-auth";
+import nextAuth, { Awaitable, ISODateString, NextAuthOptions } from "next-auth";
 import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import GoogleProvider from "next-auth/providers/google";
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { Profile } from "next-auth";
-import { NextResponse } from "next/server";
+import DBClient from '@/lib/prisma'
+
+
+const prisma = DBClient.getInstance().prisma
+
 
 interface GoogleProfile extends Profile {
   sub: string;
@@ -14,7 +17,6 @@ interface GoogleProfile extends Profile {
   picture: string; 
 }
 
-const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
   // adapter: PrismaAdapter(prisma),
@@ -112,9 +114,23 @@ export const authOptions: NextAuthOptions = {
     async redirect({ url, baseUrl }) {
       return baseUrl
     },
-    // async session({ session, token, user } ) {
-    //   session.user.id = user.id;
-    //   return session;
-    // },
+    async session({ session}  ) {
+
+      const data = await prisma.user.findUnique({
+        where:{
+          email: session?.user?.email || ""
+        },
+        select:{
+          id:true,
+          name : true
+        }
+      })
+
+      if (session && session.user) {
+        session.user.id = data?.id || "";
+        session.user.name = data?.name || ""
+      }
+      return session;
+    },
   }
 };

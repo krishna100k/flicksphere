@@ -15,6 +15,7 @@ export const userSchema = z.object({
 export type User = z.infer<typeof userSchema>
 
 export interface UserSession{
+    id: string,
     name?: string,
     email?: string,
     image?: string 

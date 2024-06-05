@@ -4,8 +4,18 @@ import Slider from "@/components/slider";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import TrendingMovies from "./trendingMovies";
+import { ContinueWatchingSchema } from "@/packages/types/continueWatching";
+import ContinueWatching from "./continuewatching";
+import { useRouter } from "next/navigation";
 
-const MainContent:React.FC<any> = ({trendingMovies, trendingSeries}) => {
+interface Props {
+  trendingMovies: any;
+  trendingSeries: any;
+  continueWatching: ContinueWatchingSchema[] ;
+}
+
+const MainContent:React.FC<Props> = ({trendingMovies, trendingSeries, continueWatching}) => {
+
 
     const apiKey = process.env.NEXT_PUBLIC_TMDB_AUTH;
     const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`
@@ -13,6 +23,12 @@ const MainContent:React.FC<any> = ({trendingMovies, trendingSeries}) => {
 
     const [data, setData] = useState<any>();
     const [TV, setTV] = useState<any>();
+
+    const router = useRouter();
+
+    useEffect(() => {
+      router.refresh();
+    }, [])
 
     useEffect(()=>{
         const fetchData = async () => {
@@ -51,6 +67,7 @@ const MainContent:React.FC<any> = ({trendingMovies, trendingSeries}) => {
       <Slider movieData={movieData} />
       <TrendingMovies type={"Movies"} data = {movieData} />
       <TrendingMovies type={"Series"} data={tvData} /> 
+      <ContinueWatching data={continueWatching} />
     </main>
   );
 };

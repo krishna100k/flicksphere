@@ -7,18 +7,29 @@ import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import Series from "@/components/series";
 import Image from  "next/image"
+import { useSession } from "next-auth/react";
+import { ContinueWatchingSchema } from "@/packages/types/continueWatching";
+
 
 
 const Show = () => {
   const { id } = useParams();
 
+  const session  = useSession();
+  const user = session?.data?.user;
+
+
   const searchParams = useSearchParams();
 
   const category = searchParams.get("category");
+  const season = searchParams.get("season");
+  const episode = searchParams.get("ep")
 
   const apiKey = process.env.NEXT_PUBLIC_TMDB_AUTH;
   const [data, setData] = useState<any>();
   const [credits, setCredits] = useState<any>();
+
+  const [isAddedToContinueWatching, setIsAddedToContinueWatching] = useState<boolean>(false)
 
   const fetchMovie = async () => {
     const url = `https://api.themoviedb.org/3/${category}/${id}?api_key=${apiKey}`;
@@ -41,10 +52,53 @@ const Show = () => {
   }
 
 
+  const addToContinueWatching = async () => {
+
+    if(!user){
+      return alert("User Not Found!")
+    }else if (!category){
+      return alert("Category Not Found!")
+    }
+
+    const body : ContinueWatchingSchema = {
+      userId : user?.id,
+      movieId : data && data?.id.toString(),
+      contentName : data && data?.title || data?.original_name,
+      category: category && category,
+      season: season ? season : undefined,
+      episode: episode? episode : undefined,
+      imageUrl: data && data?.poster_path
+    }
+
+    try{
+      const res = await axios.post(`/api/continuewatching`, body, {withCredentials : true});
+      console.log(res)
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+
   useEffect(() => {
     fetchMovie();
     fetchCredits();
   }, []);
+
+  useEffect(() => {
+
+    if (session.status === "authenticated" && data && !isAddedToContinueWatching ) {
+      const timeoutId = setTimeout(() => {
+        addToContinueWatching();
+        setIsAddedToContinueWatching(true); 
+      }, 20000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [session, data, season, episode]);
+
+  useEffect(() => {
+    setIsAddedToContinueWatching(false);
+  }, [season, episode])
 
 
   return (

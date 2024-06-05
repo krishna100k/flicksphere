@@ -6,6 +6,7 @@ import Header from "@/components/header";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { UserSession } from "@/packages/types/user";
+import ReduxProvider from "./ReduxProvider";
 
 
 
@@ -25,10 +26,12 @@ export default async function RootLayout({
   return (
     <html className="dark" lang="en">
       <SessionsProvider >
+        <ReduxProvider >
       <body className={inter.className}>
         <Header user={session?.user as UserSession } />
         {children}
         </body>
+        </ReduxProvider>
       </SessionsProvider>
     </html>
   );

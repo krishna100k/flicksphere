@@ -3,6 +3,11 @@ import { PrismaClient } from "@prisma/client";
 import { userSchema } from "@/packages/types/user";
 import bcrypt from "bcrypt"
 
+import DBClient from '@/lib/prisma'
+
+
+const prisma = DBClient.getInstance().prisma
+
 
 export const POST = async (req: NextRequest) => {
     const data = await req.json();
@@ -14,7 +19,6 @@ export const POST = async (req: NextRequest) => {
 
 
     const {name, email, password} = parsedData?.data
-    const prisma = new PrismaClient();
 
 
 
