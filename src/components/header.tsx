@@ -166,8 +166,9 @@ const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
                 <AvatarImage src={user?.image} />
                 <AvatarFallback>{name[0]}</AvatarFallback>
               </Avatar>
-              <div ref={popRef} className={` flex flex-col justify-start gap-4 pt-5 items-center absolute top-14 right-10 rounded-md bg-[#01050F] overflow-hidden ${popOver ? "h-48 w-40" : "h-0 w-0"} transition-all duration-200 ease-in-out`}>
+              <div ref={popRef} className={` flex flex-col justify-start gap-4 pt-5 items-center absolute top-14 right-10 rounded-md bg-[#01050F] overflow-hidden ${popOver ? " h-52 w-40" : "h-0 w-0"} transition-all duration-200 ease-in-out`}>
                 <Link href={"/continue"} className="transition-all duration-200 hover:bg-white/20 px-5 py-1 rounded-md text-center text-sm text-wrap">Continue Watching</Link>
+                <Link href={"/changepassword"} className="transition-all duration-200 hover:bg-white/20 px-5 py-1 rounded-md text-center text-sm text-wrap">Change <br />Password</Link>
                 <button onClick={() => signOut()} className="  transition-all duration-200 hover:bg-white/20 px-5 py-1 rounded-md  text-sm">Logout</button>
               </div>
               </>
