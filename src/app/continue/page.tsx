@@ -3,7 +3,6 @@
 import ContinueWatching from "@/components/continuewatching";
 import { ContinueWatchingSchema } from "@/packages/types/continueWatching";
 import { useSelector } from "react-redux";
-import { CircularProgress } from "@mui/material";
 import Footer from "@/components/footer";
 
 interface CWState {

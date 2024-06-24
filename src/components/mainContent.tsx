@@ -74,7 +74,7 @@ const MainContent:React.FC<Props> = ({trendingMovies, trendingSeries}) => {
       <Slider movieData={movieData} />
       <TrendingMovies type={"Movies"} data = {movieData} />
       <TrendingMovies type={"Series"} data={tvData} /> 
-      <ContinueWatching data={CWData.slice(0,15)} />
+      <ContinueWatching data={CWData.slice(0,16)} />
     </main>
   );
 };
