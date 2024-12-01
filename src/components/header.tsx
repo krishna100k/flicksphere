@@ -39,7 +39,6 @@ const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
     }catch(err){
       console.log(err)
     }
-
   }
 
   useEffect( () => {
@@ -105,7 +104,7 @@ const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
   const router = useRouter();
   const searchHandler = (e: FormEvent) => {
     e.preventDefault();
-    router.push(`/search?query=${search}&category=movie`);
+    router.push(`/search?query=${search}&category=movie&page=1`);
   };
 
   const name = user?.name as string

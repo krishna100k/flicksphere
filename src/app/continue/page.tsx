@@ -9,10 +9,6 @@ interface CWState {
   continueWatching : {data : ContinueWatchingSchema[]}
 }
 
-
-
-
-
 const Continue = () => {
 
     const CWData = useSelector((state : CWState) => state?.continueWatching?.data);

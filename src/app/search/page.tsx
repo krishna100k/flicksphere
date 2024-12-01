@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Paginator from "@/components/paginator";
 
 
 
@@ -16,6 +17,7 @@ const Search = () => {
   //Query Params
   const query = searchParams.get("query");
   const categoryQuery:string = searchParams.get("category") as string;
+  const pageNumber = searchParams.get("page");
 
   //States
   const [data, setData] = useState<any>(null);
@@ -49,9 +51,10 @@ const Search = () => {
       accept: 'application/json',
       Authorization: `Bearer ${authToken}`
     }
-    const url = `https://api.themoviedb.org/3/search/${category}?query=${queryString}&include_adult=true&language=en-US&page=1&api_key=${authToken && authToken}`;
+    const url = `https://api.themoviedb.org/3/search/${category}?query=${queryString}&include_adult=true&language=en-US&page=${pageNumber}&api_key=${authToken && authToken}`;
     try{
       const res = await axios.get(url, {headers});
+      console.log("fetchedData", res)
       setData(res?.data)
     }catch(err){
       console.log(err)
@@ -93,6 +96,9 @@ const Search = () => {
                 return <MovieTile data={show} category = {categoryQuery} />
               })
             }
+            <Paginator totalPages={data?.total_pages} query = {query as string} category={categoryQuery} getContent={fetchData} >
+             
+            </Paginator>
         </div>
       </main>
       <Footer />
