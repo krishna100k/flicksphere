@@ -25,7 +25,7 @@ const Search = () => {
   const categories = ["Movie", "TV", "Person"];
 
   const categorySwitch = (category: string) => {
-    router.push(`/search?query=${query}&category=${category.toLocaleLowerCase()}`);
+    router.push(`/search?query=${query}&category=${category.toLocaleLowerCase()}&page=1`);
   };
 
   const convertQueryToUrl = ():string => {
@@ -68,7 +68,6 @@ const Search = () => {
 
   return (
     <>
-      {/* <Header /> */}
       <main className="pt-[15vh] pb-[19vh] grid grid-rows-[1fr, auto] lg:grid-cols-[20vw] items-start px-5 lg:px-0 lg:gap-y-16 gap-x-28 ">
         <h1 className=" justify-self-center row-span-1 col-span-2">
           Search Results for <b>{query}</b>.
