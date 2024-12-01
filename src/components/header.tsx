@@ -104,7 +104,10 @@ const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
   const router = useRouter();
   const searchHandler = (e: FormEvent) => {
     e.preventDefault();
-    router.push(`/search?query=${search}&category=movie&page=1`);
+    if(search.trim() == ''){
+      return;
+    }
+    router.push(`/search?query=${search.trim()}&category=movie&page=1`);
   };
 
   const name = user?.name as string

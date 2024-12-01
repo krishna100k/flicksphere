@@ -28,9 +28,13 @@ const paginator: React.FC<{ totalPages: number, query: string, category: string,
     const endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
 
     const pageNumbers = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
-
+    
+    if (totalPages <= 1) {
+        return null; 
+    }
+    
     return (
-        <div className="flex gap-2 flex-wrap items-center">
+        <div className="flex gap-2 flex-wrap items-center mt-5">
             <button
                 className="px-3 py-1 h-10 bg-gray-700 text-white rounded-sm cursor-pointer disabled:opacity-50"
                 onClick={() => currentPage > 1 && changePageNumber(currentPage - 1)}
