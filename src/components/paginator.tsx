@@ -2,7 +2,6 @@
 import { useSearchParams } from "next/navigation"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 
 const paginator: React.FC<{ totalPages: number, query: string, category: string, getContent: Function }> = ({ totalPages, query, category, getContent }) => {
     const router = useRouter();
@@ -33,11 +32,11 @@ const paginator: React.FC<{ totalPages: number, query: string, category: string,
     return (
         <div className="flex gap-2 flex-wrap items-center">
             <button
-                className="px-3 py-1 h-10 text-white rounded-sm cursor-pointer disabled:opacity-50"
+                className="px-3 py-1 h-10 bg-gray-700 text-white rounded-sm cursor-pointer disabled:opacity-50"
                 onClick={() => currentPage > 1 && changePageNumber(currentPage - 1)}
                 disabled={currentPage === 1}
             >
-            <FaArrowCircleLeft className=" text-3xl" />
+                &#8592;
             </button>
 
             {startPage > 1 && (
@@ -76,11 +75,11 @@ const paginator: React.FC<{ totalPages: number, query: string, category: string,
             )}
 
             <button
-                className="px-3 py-1 h-10 rounded-sm cursor-pointer disabled:opacity-50"
+                className="px-3 py-1 h-10 bg-gray-700 text-white rounded-sm cursor-pointer disabled:opacity-50"
                 onClick={() => currentPage < totalPages && changePageNumber(currentPage + 1)}
                 disabled={currentPage === totalPages}
             >
-          <FaArrowCircleRight className=" text-3xl" />
+                &#8594;
             </button>
         </div>
     );
