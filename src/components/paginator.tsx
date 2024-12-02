@@ -43,7 +43,7 @@ const paginator: React.FC<{ totalPages: number, query: string, category: string,
                 &#8592;
             </button>
 
-            {startPage > 1 && (
+            {(startPage > 1) && (
                 <>
                     <div
                         className="w-10 h-10 rounded-sm flex justify-center items-center bg-gray-800 text-white cursor-pointer"
@@ -58,8 +58,11 @@ const paginator: React.FC<{ totalPages: number, query: string, category: string,
             {pageNumbers.map((page) => (
                 <div
                     key={page}
-                    style={{ background: currentPage === page ? "#180E39" : "#1E293B" }}
-                    className="w-10 h-10 rounded-sm flex justify-center items-center cursor-pointer"
+                    className={`w-10 h-10 rounded-sm flex justify-center items-center cursor-pointer ${
+                        currentPage === page
+                            ? "bg-[#180E39]"
+                            : "bg-[#1E293B] hover:bg-gray-600"
+                    }`}
                     onClick={() => changePageNumber(page)}
                 >
                     {page}

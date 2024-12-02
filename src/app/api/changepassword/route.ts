@@ -36,7 +36,7 @@ export const PUT = async (req: NextRequest) => {
       if (currPassword !== null) {
         const passwordMatch = await bcrypt.compare(currPassword, user.password);
         if (!passwordMatch) {
-          return NextResponse.json({ error: "Password Mismatch!" }, { status: 400 });
+          return NextResponse.json({ error: "Invalid old password!" }, { status: 400 });
         }
       } else {
         return NextResponse.json({ error: "Password exists for this user, please enter current password!" }, { status: 400 });

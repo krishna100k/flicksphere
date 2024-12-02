@@ -24,6 +24,8 @@ const ChangePassword = () => {
     const userName = user?.name
     const FirstLetter = user?.name?.slice(0,1) as string
 
+    let isButtonDisabled : boolean = loading || currPassword.trim() == "" || newPassword.trim() == "" || confirmPassword.trim() == ""
+
     useEffect(() => {
         if(!session){
             router.replace("/")
@@ -44,7 +46,6 @@ const ChangePassword = () => {
         }
 
         try{
-
             const res = await axios.put(`/api/changepassword`, body);
             console.log(res);
             alert("Password Changed Successfully!")
@@ -79,8 +80,7 @@ const ChangePassword = () => {
             <input onChange={(e) => setCurrPassword(e?.target?.value)} value={currPassword} className="bg-[#1F2937] min-w-[16rem] p-3 rounded-sm text-[#F9FAFB] text-sm" disabled={nullPassword} placeholder="Current Password" type="password" />
             <input onChange={(e) => setNewPassword(e?.target?.value)} value={newPassword} className="bg-[#1F2937] min-w-[16rem] p-3 rounded-sm text-[#F9FAFB] text-sm" placeholder="New Password" type="password" />
             <input onChange={(e) => setConfirmPassword(e?.target?.value)} value={confirmPassword} className="bg-[#1F2937] min-w-[16rem] p-3 rounded-sm text-[#F9FAFB] text-sm" placeholder="Confirm New Password"  type="password" />
-            <button disabled={loading} className="bg-[#6D28D9] py-2  mt-4 min-w-[16rem] rounded-sm" type="submit">Submit</button>
-
+            <button disabled={isButtonDisabled} className={`py-2  mt-4 min-w-[16rem] rounded-sm cursor-pointer transition-colors duration-150 ${isButtonDisabled ? 'bg-slate-800 text-slate-500 hover:bg-slate-600' : 'bg-[#6D28D9] hover:bg-[#7f40e6]'} `} type="submit">Submit</button>
 
         </form>
     </div>

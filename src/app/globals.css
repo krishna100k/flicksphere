@@ -86,3 +86,7 @@
         scrollbar-width: none;  
   }
 }
+
+body{
+  scroll-behavior: smooth;
+}

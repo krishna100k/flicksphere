@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="w-full h-52 border-t border-slate-700 bg-black/35 flex justify-center items-center gap-10 px-7">
+    <footer className="w-full h-52 border-t border-slate-700 bg-black/35 flex justify-center items-center gap-10 px-7 relative bottom-0">
       <div className="font-black text-8xl">
         <span>F</span>
         <span className="text-[#6D28D9]">S</span>
