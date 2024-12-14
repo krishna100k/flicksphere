@@ -90,3 +90,7 @@
 body{
   scroll-behavior: smooth;
 }
+
+.MuiDataGrid-row{
+  cursor: pointer !important;
+}

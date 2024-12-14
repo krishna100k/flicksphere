@@ -55,11 +55,8 @@ const Login = () => {
             console.log(err);
             alert("Login Failed!")
         }
-
-
-
-
     }
+
 
   return (
     <main className='w-full h-screen ' style={{backgroundImage:`url(/Images/background.jpg)`}} >
@@ -71,7 +68,7 @@ const Login = () => {
                 </div>
                 <div className='flex flex-col gap-4 px-10'>
                     <input onChange={(e) =>setEmail(e?.target?.value) } value={email} className='bg-[#1F2937] p-3 rounded-sm text-[#F9FAFB] text-sm' placeholder='Email' type="text" />
-                    <input onChange={(e) =>setPassword(e?.target?.value) } value={password} className='bg-[#1F2937] p-3 rounded-sm text-[#F9FAFB] text-sm' placeholder='Password' type="text" />
+                    <input onChange={(e) =>setPassword(e?.target?.value) } value={password} className='bg-[#1F2937] p-3 rounded-sm text-[#F9FAFB] text-sm' placeholder='Password' type="password" />
                     <div className='w-full h-full flex items-end justify-end mt-5 gap-4 flex-col-reverse'>
                         <h1 className='text-sm h-full'>New User? <Link href={"/signup"}>Create an account.</Link></h1>
                         <button disabled={loading ? true : false} type='submit' className="bg-[#6D28D9] w-28 h-9  rounded-sm flex justify-center items-center">{loading ? <CircularProgress style={{color: "white", width:"25px", height: "25px"}} /> : "Login"}</button>

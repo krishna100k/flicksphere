@@ -16,7 +16,6 @@ interface CWState {
 interface Props {
   trendingMovies: any;
   trendingSeries: any;
-  // continueWatching: ContinueWatchingSchema[] ;
 }
 
 const MainContent:React.FC<Props> = ({trendingMovies, trendingSeries}) => {
