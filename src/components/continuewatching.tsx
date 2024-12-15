@@ -6,9 +6,13 @@ import CWCards from "./CWCards"
 import { Switch } from "./ui/switch"
 import { useState } from "react"
 import CWGrid from "./Grids/CWGrid"
+import Button from "./button"
+import { usePathname, useRouter } from "next/navigation"
 
 const ContinueWatching: React.FC<{ data: ContinueWatchingSchema[] }> = ({ data }) => {
   const [isGridViewFlag, setisGridViewFlag] = useState<boolean>(false);
+  const router = useRouter();
+  const currentPath = usePathname();
   return (
     <>
       {data[0]?.userId &&
@@ -21,9 +25,12 @@ const ContinueWatching: React.FC<{ data: ContinueWatchingSchema[] }> = ({ data }
                 <Switch onCheckedChange={(checked) => setisGridViewFlag(checked)} />
               </div>
             </div>
-            <div className=" hidden sm:flex items-center gap-2 sm:gap-4">
+            <div className="flex flex-row-reverse gap-6">
+            {currentPath != "/continue" && <button onClick={() => router.push("/continue")} className="bg-[#F9FAFB] text-sm text-black py-1 px-2 rounded-sm">View All</button>}
+            <div className=" hidden sm:flex items-center gap-3">
               <p>Grid View</p>
               <Switch onCheckedChange={(checked) => setisGridViewFlag(checked)} />
+            </div>
             </div>
           </div>
           <div className="flex items-start gap-3 flex-wrap justify-center">
