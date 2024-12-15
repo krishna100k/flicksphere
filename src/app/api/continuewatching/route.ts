@@ -33,7 +33,6 @@ export const POST = async (req: NextRequest) => {
                 userId,
                 movieId,
                 category
-
             }
         })
 

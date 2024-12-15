@@ -28,7 +28,6 @@ const CWCards:React.FC<any> = ({data, type}) => {
           return;
         }
       }
-  
     };
 
     const deleteHandler = async (id : string) => {
