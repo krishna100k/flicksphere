@@ -13,7 +13,7 @@ const TrendingMovies: React.FC<{ data: any, type: String }> = ({ data, type }) =
   return (
     <div className='my-9 px-7 relative'>
       <div className='flex justify-between pb-5'>
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-4'>
           <h1 className='text-xl font-bold'>Trending {type}</h1>
           <div className="flex sm:hidden items-center space-x-2 mr-2">
             <label htmlFor="airplane-mode">Grid View</label>

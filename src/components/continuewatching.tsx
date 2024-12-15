@@ -17,8 +17,8 @@ const ContinueWatching: React.FC<{ data: ContinueWatchingSchema[] }> = ({ data }
     <>
       {data[0]?.userId &&
         <div className="my-9 px-7 relative">
-          <div className="w-full flex justify-between items-center pb-5">
-            <div className="flex flex-col gap-3">
+          <div className="w-full flex justify-between items-end pb-5">
+            <div className="flex flex-col gap-4">
               <h1 className='text-xl font-bold'>Continue Watching</h1>
               <div className=" sm:hidden flex items-center gap-4">
                 <p>Grid View</p>
