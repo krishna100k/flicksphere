@@ -4,7 +4,7 @@ import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import { Switch } from './ui/switch';
 import MovieGrid from './Grids/MovieGrid';
 
-const TrendingMovies: React.FC<{ data: any, type: String }> = ({ data, type }) => {
+const TrendingMovies: React.FC<{ data: any, type: String, contentType ?: string }> = ({ data, type, contentType }) => {
 
 
   const [index, setIndex] = useState<number>(0);
@@ -14,7 +14,7 @@ const TrendingMovies: React.FC<{ data: any, type: String }> = ({ data, type }) =
     <div className='my-9 px-7 relative'>
       <div className='flex justify-between pb-5'>
         <div className='flex flex-col gap-4'>
-          <h1 className='text-xl font-bold'>Trending {type}</h1>
+          <h1 className='text-xl font-bold'>{contentType == "similar" ? "Similar" : "Trending"} {type}</h1>
           <div className="flex sm:hidden items-center space-x-2 mr-2">
             <label htmlFor="airplane-mode">Grid View</label>
             <Switch onCheckedChange={(checked) => { setShowGridViewFlag(checked); setIndex(0) }} />

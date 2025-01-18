@@ -14,6 +14,7 @@ import { Button as MatButton } from "@mui/material";
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Modal } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import TrendingMovies from "@/components/trendingMovies";
 
 
 
@@ -32,6 +33,7 @@ const Show = () => {
 
   const apiKey = process.env.NEXT_PUBLIC_TMDB_AUTH;
   const [data, setData] = useState<any>();
+  const [similarContentData, setSimilarContentData] = useState<any>();
   const [credits, setCredits] = useState<any>();
   const [trailerKey, setTrailerKey] = useState<string>();
 
@@ -76,6 +78,17 @@ const Show = () => {
     }
   }
 
+  const fetchSimilarContent = async() => {
+    const url = `https://api.themoviedb.org/3/${category}/${id}/similar?language=en-US&page=1&api_key=${apiKey}`;
+    try{
+      const res = await axios.get(url);
+      setSimilarContentData(res.data);
+      console.log("fetchSimilarContent", res);
+    }catch(err){
+      console.log(err);
+    }
+  }
+
   const onTrailerModalClose = (event : any, reason : string) => {
     setIsTrailerModalOpen(false); 
   };
@@ -112,6 +125,7 @@ const Show = () => {
     fetchMovie();
     fetchCredits();
     fetchTrailer()
+    fetchSimilarContent();
   }, []);
 
   useEffect(() => {
@@ -216,6 +230,8 @@ const Show = () => {
             allowFullScreen
           ></iframe>
         ) : <Series data={data} id={id} category={category} />}
+
+      <TrendingMovies type={category == "movie" ? "Movies" : "Series"} data = {similarContentData} contentType = {"similar"} />
       </main>
       <Footer />
     </>
