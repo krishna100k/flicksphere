@@ -60,8 +60,8 @@ const Login = () => {
 
   return (
     <main className='w-full h-screen ' style={{backgroundImage:`url(/Images/background.jpg)`}} >
-        <div className='w-full h-full bg-[#030712]/70 backdrop-blur-[1px] flex justify-center items-center '>
-            <form onSubmit={handleSubmit} className='bg-[#09090B] min-w-full min-h-full sm:min-w-[27rem] sm:min-h-[30rem] h-auto rounded-md flex flex-col gap-24'>
+        <div className='w-full h-full bg-[#030712]/70 backdrop-blur-[1px] flex justify-center items-center overflow-hidden'>
+            <form onSubmit={handleSubmit} className='bg-[#09090B] min-w-full min-h-full sm:min-w-[27rem] sm:min-h-[30rem] h-auto rounded-md flex flex-col justify-center gap-24'>
                 <div onClick={() => router.push("/")} className='flex justify-center items-center font-black text-4xl mt-10 cursor-pointer'>
                     <h1 className='text-[#F9FAFB]'>F</h1>
                     <h1 className='text-[#6D28D9]'>S</h1>

@@ -176,13 +176,16 @@ const Header: React.FC<{ user?: UserSession }> = ({ user }) => {
               </>
             ) : (
               <div className="flex justify-center items-center gap-3">
+                <Link href={"/login"}>
                 <button
-                  onClick={() => router.push("/login")}
                   className="text-sm"
                 >
                   Login
                 </button>
-                <button className = "bg-[#F9FAFB] text-sm text-black py-2 px-3 rounded-sm" onClick={() => router.push("/signup")}>Signup</button>
+                </Link>
+                <Link href={"/signup"}>
+                <button className = "bg-[#F9FAFB] text-sm text-black py-2 px-3 rounded-sm" >Signup</button>
+                </Link>
               </div>
             )}
           </div>
