@@ -24,7 +24,6 @@ const Show = () => {
   const session = useSession();
   const user = session?.data?.user;
 
-
   const searchParams = useSearchParams();
 
   const category = searchParams.get("category");
