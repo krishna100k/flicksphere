@@ -10,10 +10,11 @@ interface CWState {
 }
 
 const MovieTile: React.FC<{ data: any, category: string }> = ({ data, category }) => {
-  const {id, title, overview, release_date, poster_path, original_name, profile_path } = data;
+  const {id, title, overview, release_date, poster_path, original_name, profile_path, known_for_department  } = data;
   const router = useRouter();
 
   const CWData = useSelector((state : CWState) => state?.continueWatching?.data)
+  let description = category === 'person' ? known_for_department : overview?.slice(0, 90) + "...";
 
   const routeHandler = () => {
     if(category === "tv"){
@@ -48,7 +49,7 @@ const MovieTile: React.FC<{ data: any, category: string }> = ({ data, category }
       <div className=" w-full flex flex-col gap-1 my-2">
         <h1 className="text-md font-bold">{title || original_name}</h1>
         <p className="text-xs text-[#9CA3AF]">{release_date}</p>
-        <p className="text-sm pt-5">{overview?.slice(0, 90)}...</p>
+        <p className="text-sm pt-5">{description}</p>
       </div>
     </div>
   );
