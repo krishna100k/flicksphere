@@ -18,8 +18,8 @@ const theme = createTheme({
 
 const MovieGrid: React.FC<{ showsData: any[], type : String }> = ({ showsData, type }) => {
 
-    let titleField = type == "Movies" ? "title" : "name";
-    let releaseDate = type == "Movies" ? 'release_date' : 'first_air_date'
+    let titleField = type === 'Movies' ? 'title' : 'name';
+    let releaseDate = type ==  "Movies" ? 'release_date' : 'first_air_date'
     const router = useRouter();
     const CWData = useSelector((state : CWState) => state?.continueWatching?.data);
 

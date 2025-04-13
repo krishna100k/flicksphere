@@ -15,6 +15,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Modal } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import TrendingMovies from "@/components/trendingMovies";
+import PersonDetails from "@/components/personDetails";
 
 
 
@@ -43,7 +44,6 @@ const Show = () => {
     const url = `https://api.themoviedb.org/3/${category}/${id}?api_key=${apiKey}`;
     try {
       const res = await axios.get(url);
-      console.log(res);
       setData(res?.data);
     } catch (err) {
       console.log(err);
@@ -123,9 +123,11 @@ const Show = () => {
 
   useEffect(() => {
     fetchMovie();
-    fetchCredits();
-    fetchTrailer()
-    fetchSimilarContent();
+    if(category!= 'person'){
+      fetchCredits();
+      fetchTrailer()
+      fetchSimilarContent();
+    }
   }, []);
 
   useEffect(() => {
@@ -183,7 +185,6 @@ const Show = () => {
                       </div>
                     </div>
                     <div className="flex flex-col md:items-start justify-center items-center">
-                      {/* <p className="font-bold">Overview</p> */}
                       <p className=" md:text-start text-justify">{data?.overview}</p>
                     </div>
 
@@ -235,7 +236,7 @@ const Show = () => {
             <TrendingMovies type={category == "movie" ? "Movies" : "Series"} data={similarContentData} contentType={"similar"} />
           </main> :
           <>
-          
+          <PersonDetails data={data} category={category} id={id}/>
           </>
       }
 
