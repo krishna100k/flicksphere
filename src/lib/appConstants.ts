@@ -1,0 +1,1 @@
+export let imageFallback = "/Images/image-fallback.jpg"
