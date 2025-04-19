@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { CWState } from '../moviecards';
 import { useSelector } from 'react-redux';
 import styles from "./MovieGrid.module.css"
+import { imageFallback } from '@/lib/appConstants';
 
 
 const paginationModel = { page: 0, pageSize: 10 };
@@ -31,7 +32,11 @@ const MovieGrid: React.FC<{ showsData: any[], type : String }> = ({ showsData, t
             sortable : false,
             renderCell : (params) => {
                 const imageUrl = `https://media.themoviedb.org/t/p/w300_and_h450_bestv2${params.value}`
-                return <img className='h-full' src={imageUrl} alt='Image' />
+                return <img 
+                className='h-full' 
+                onError={(e) => e.currentTarget.src = imageFallback} 
+                src={imageUrl} 
+                alt='Image' />
             },
         },
         

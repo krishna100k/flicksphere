@@ -1,5 +1,6 @@
 "use client"
 
+import { imageFallback } from "@/lib/appConstants";
 import { ContinueWatchingSchema } from "@/packages/types/continueWatching";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -38,12 +39,12 @@ const MovieTile: React.FC<{ data: any, category: string }> = ({ data, category }
   return (
     <div onClick={routeHandler} className=" bg-slate-900/60 hover:bg-[#180E39] transition-colors duration-300 w-full min-h-36 rounded-md flex gap-8 mb-5 items-center cursor-pointer">
       <div className=" w-[120px] h-full rounded-sm overflow-hidden">
-        <Image
-        className=" h-full object-cover ml-2 md:m-0 "
+        <img
+          className=" h-full object-cover ml-2 md:m-0 "
           src={`https://image.tmdb.org/t/p/w94_and_h141_bestv2${poster_path && poster_path || profile_path && profile_path}`}
           alt="Image Not Available"
+          onError={(e) => e.currentTarget.src = imageFallback} 
           width={100}  
-          height={100}
         />
       </div>
       <div className=" w-full flex flex-col gap-1 my-2">
