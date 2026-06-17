@@ -234,7 +234,7 @@ const Show = () => {
               <iframe
                 className=" w-[100%] h-auto md:w-[80vw] m-auto min-h-[32rem] md:min-h-[40rem] lg:min-h-[1080px] py-10"
                 // src={`https://vidsrc.to/embed/movie/${id}`}
-                src={`https://vidsrc.xyz/embed/movie/${id}`}
+                src={`https://player.videasy.net/movie/${id}`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
